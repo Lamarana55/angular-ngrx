@@ -9,6 +9,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { EditProductComponent } from './components/product/edit-product/edit-product.component';
 import { ProductListComponent } from './components/product/product-list/product-list.component';
 import { ProductItemComponent } from './components/product/product-list/product-item/product-item.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ProductItemComponent } from './components/product/product-list/product-
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
