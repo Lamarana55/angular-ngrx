@@ -1,1 +1,18 @@
-<p>product-list works!</p>
+<table class="table table-bordered table-sm" *ngIf="state">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>NAME</th>
+    <th>PRICE</th>
+    <th>QUANTITY</th>
+    <th>SELECTED</th>
+    <th>AVAILABLE</th>
+    <th>DELETE</th>
+    <th>UPDATE</th>
+  </tr>
+  </thead>
+  <tbody>
+    <app-product-item *ngFor="let product of state.products" [product]="product" style="display: contents"> </app-product-item>
+  </tbody>
+</table>
+

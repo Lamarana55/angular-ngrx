@@ -1,1 +1,31 @@
-<p>product-item works!</p>
+<tr *ngIf="product">
+  <td>{{product.id}}</td>
+  <td>{{product.name}}</td>
+  <td>{{product.price}}</td>
+  <td>{{product.quantity}}</td>
+  <td class="text-center">
+    <div class="form-group form-check">
+      <label class="form-check-label btn-outline-primary">
+        <input [ngClass]="product.selected?'fa fa-check-input text-success': ' ' " type="checkbox" [checked]="product.selected" (change)="onSeleted(product)" >
+      </label>
+    </div>
+  </td>
+  <td class="text-center">
+    <div class="form-group form-check">
+      <label class="form-check-label btn-outline-primary">
+        <input [ngClass]="product.available?'fa fa-check-input text-success': ' ' " type="checkbox" [checked]="product.available"
+               (change)="onAvailable(product)" >
+      </label>
+    </div>
+  </td>
+  <td class="text-center">
+    <button class="btn btn-outline-danger btn-sm" (click)="onDelete(product)">
+      <span class="fa fa-trash-o"></span>
+    </button>
+  </td>
+  <td class="text-center">
+    <button class="btn btn-outline-primary btn-sm" (click)="onUpdate(product)">
+      <span class="fa fa-edit"></span>
+    </button>
+  </td>
+</tr>
