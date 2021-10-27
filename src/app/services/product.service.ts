@@ -16,7 +16,7 @@ export class ProductService {
   }
 
   show(id: number): Observable<Product>{
-    return this.httpClient.get<Product>(API_URL + "/products")
+    return this.httpClient.get<Product>(API_URL + "/products/" + id)
   }
 
   getSelectedProducts():Observable<Product[]>{

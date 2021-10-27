@@ -4,11 +4,23 @@ import {Observable, of} from 'rxjs';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {
   AvailableProductsActionError,
-  AvailableProductsActionSuccess, DeleteProductsActionError, DeleteProductsActionSuccess,
+  AvailableProductsActionSuccess,
+  DeleteProductsActionError,
+  DeleteProductsActionSuccess, EditProductsActionError, EditProductsActionSuccess,
   GetAllProductsActionError,
-  GetAllProductsActionSuccess, GetAvailableProductsActionError, GetAvailableProductsActionSuccess, GetSelectedProductsActionError,
-  GetSelectedProductsActionSuccess, ProductsActions,
-  ProductsActionsType, SearchProductsActionError, SearchProductsActionSuccess, SelectProductsActionError, SelectProductsActionSuccess
+  GetAllProductsActionSuccess,
+  GetAvailableProductsActionError,
+  GetAvailableProductsActionSuccess,
+  GetSelectedProductsActionError,
+  GetSelectedProductsActionSuccess,
+  NewProductsActionSuccess,
+  ProductsActions,
+  ProductsActionsType, SaveProductsActionError,
+  SaveProductsActionSuccess,
+  SearchProductsActionError,
+  SearchProductsActionSuccess,
+  SelectProductsActionError,
+  SelectProductsActionSuccess
 } from './products.actions';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {Action} from '@ngrx/store';
@@ -107,14 +119,49 @@ export class ProductsEffects {
     ()=> this.effectActions.pipe(
       ofType(ProductsActionsType.DELETE_PRODUCT),
       mergeMap((action: ProductsActions) => {
-        // const productPayload = {...action.payload}
-        return this.productService.deleteProducts(action.payload).pipe(
-          map( (product) => new DeleteProductsActionSuccess(product)),
+        const productPayload = {...action.payload}
+        console.log("product payload " + productPayload.name);
+        return this.productService.deleteProducts(productPayload).pipe(
+          map( () => new DeleteProductsActionSuccess(productPayload)),
           catchError( err => of(new DeleteProductsActionError(err.message)))
         )
       })
 
     )
   );
+
+  newProductEffect: Observable<ProductsActions> = createEffect(
+    ()=> this.effectActions.pipe(
+      ofType(ProductsActionsType.NEW_PRODUCT),
+      map((action: ProductsActions) => {
+        return new NewProductsActionSuccess({})
+      })
+    )
+  );
+
+  saveProductEffect: Observable<ProductsActions> = createEffect(
+    ()=> this.effectActions.pipe(
+      ofType(ProductsActionsType.SAVE_PRODUCT),
+      mergeMap((action: ProductsActions) => {
+        return this.productService.save(action.payload).pipe(
+          map( (product) => new SaveProductsActionSuccess(product)),
+          catchError( err => of(new SaveProductsActionError(err.message)))
+        )
+      })
+    )
+  );
+
+  editProductEffect: Observable<ProductsActions> = createEffect(
+    ()=> this.effectActions.pipe(
+      ofType(ProductsActionsType.EDIT_PRODUCT),
+      mergeMap((action: ProductsActions) => {
+        return this.productService.show(action.payload).pipe(
+          map( (product) => new EditProductsActionSuccess(product)),
+          catchError( err => of(new EditProductsActionError(err.message)))
+        )
+      })
+    )
+  );
+
 
 }

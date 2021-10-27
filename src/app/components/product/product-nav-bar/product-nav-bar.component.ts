@@ -6,6 +6,7 @@ import {
   GetSelectedProductsAction,
   SearchProductsAction
 } from '../../../ngrx/products.actions';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-product-nav-bar',
@@ -14,7 +15,7 @@ import {
 })
 export class ProductNavBarComponent implements OnInit {
 
-  constructor(private store: Store<any>) { }
+  constructor(private store: Store<any>, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -34,7 +35,7 @@ export class ProductNavBarComponent implements OnInit {
   }
 
   onNewProduct() {
-
+    this.router.navigateByUrl("/newProduct");
   }
 
   onSearch(dataForm: any) {

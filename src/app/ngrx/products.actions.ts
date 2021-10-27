@@ -33,12 +33,29 @@ export enum ProductsActionsType {
 
  // Delete Product
   DELETE_PRODUCT = '[Products] delete product ',
-  DELETE_PRODUCT_SUCCESS = '[Products] delte product success',
+  DELETE_PRODUCT_SUCCESS = '[Products] delete product success',
   DELETE_PRODUCT_ERROR = '[Products] delete product error',
+
+ // New Product
+  NEW_PRODUCT = '[Products] new product ',
+  NEW_PRODUCT_SUCCESS = '[Products] new product success',
+  NEW_PRODUCT_ERROR = '[Products] new product error',
+
+// Save Product
+  SAVE_PRODUCT = '[Products] save product ',
+  SAVE_PRODUCT_SUCCESS = '[Products] save product success',
+  SAVE_PRODUCT_ERROR = '[Products] save product error',
+
+// EDIT Product
+  EDIT_PRODUCT = '[Products] edit product ',
+  EDIT_PRODUCT_SUCCESS = '[Products] edit product success',
+  EDIT_PRODUCT_ERROR = '[Products] edit product error',
+
 
 
 }
 
+// Get All
 export class GetAllProductsAction implements Action {
   type: ProductsActionsType = ProductsActionsType.GET_ALL_PRODUCTS;
 
@@ -213,7 +230,7 @@ export class DeleteProductsActionSuccess implements Action {
 
   type: ProductsActionsType = ProductsActionsType.DELETE_PRODUCT_SUCCESS;
 
-  constructor(public payload: any) {
+  constructor(public payload: Product) {
   }
 
 }
@@ -226,6 +243,90 @@ export class DeleteProductsActionError implements Action {
   }
 
 }
+
+
+// New  products
+export class NewProductsAction implements Action {
+  type: ProductsActionsType = ProductsActionsType.NEW_PRODUCT;
+
+  constructor(public payload: any) {
+  }
+
+}
+
+export class NewProductsActionSuccess implements Action {
+
+  type: ProductsActionsType = ProductsActionsType.NEW_PRODUCT_SUCCESS;
+
+  constructor(public payload: any) {
+  }
+
+}
+
+export class  NewProductsActionError implements Action {
+
+  type: ProductsActionsType = ProductsActionsType.NEW_PRODUCT_ERROR;
+
+  constructor(public payload: string) {
+  }
+
+}
+
+
+// Save  products
+export class SaveProductsAction implements Action {
+  type: ProductsActionsType = ProductsActionsType.SAVE_PRODUCT;
+
+  constructor(public payload: Product) {
+  }
+
+}
+
+export class SaveProductsActionSuccess implements Action {
+
+  type: ProductsActionsType = ProductsActionsType.SAVE_PRODUCT_SUCCESS;
+
+  constructor(public payload: Product) {
+  }
+
+}
+
+export class  SaveProductsActionError implements Action {
+
+  type: ProductsActionsType = ProductsActionsType.SAVE_PRODUCT_ERROR;
+
+  constructor(public payload: string) {
+  }
+
+}
+
+// Edit  products
+export class EditProductsAction implements Action {
+  type: ProductsActionsType = ProductsActionsType.EDIT_PRODUCT;
+
+  constructor(public payload: number) {
+  }
+
+}
+
+export class EditProductsActionSuccess implements Action {
+
+  type: ProductsActionsType = ProductsActionsType.EDIT_PRODUCT_SUCCESS;
+
+  constructor(public payload: Product) {
+  }
+
+}
+
+export class  EditProductsActionError implements Action {
+
+  type: ProductsActionsType = ProductsActionsType.EDIT_PRODUCT_ERROR;
+
+  constructor(public payload: string) {
+  }
+
+}
+
 
 
 export type ProductsActions =
@@ -255,5 +356,16 @@ export type ProductsActions =
 
   DeleteProductsAction |
   DeleteProductsActionSuccess |
-  DeleteProductsActionError
-  ;
+  DeleteProductsActionError |
+
+  NewProductsAction |
+  NewProductsActionSuccess |
+  NewProductsActionError |
+
+  SaveProductsAction |
+  SaveProductsActionSuccess |
+  SaveProductsActionError |
+
+  EditProductsAction |
+  EditProductsActionSuccess |
+  EditProductsActionError;

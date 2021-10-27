@@ -1,1 +1,99 @@
-<p>edit-product works!</p>
+<div class="container">
+  <ng-container *ngIf="state as data">
+
+    <ng-container *ngIf="data.dataState== ProductsStateEnum.LOADING">
+      <button class="btn btn-primary" type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        <span class="sr-only">Loading...</span>
+      </button>
+      <button class="btn btn-primary" type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Loading...
+      </button>
+    </ng-container>
+
+    <ng-container *ngIf="data.dataState == ProductsStateEnum.ERROR">
+      <div class="p-2">
+        {{data.errorMessage |json}}
+      </div>
+      <div class="p-2">
+        <img src="/assets/images/No.gif" class="mx-auto d-block w-auto">
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="data.dataState == ProductsStateEnum.UPDATED">
+      <div class="alert-success container p-3 m-3">
+        <span> Product updated succefully </span>
+        <button class="btn btn-outline-danger m-3" (click)="onUpdated()">Return</button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="data.dataState == ProductsStateEnum.LOADED">
+      <ng-container *ngIf="productFormGroup">
+        <ng-container *ngIf="formBuilt">
+          <form [formGroup]="productFormGroup" (ngSubmit)="onUpdateProduct()">
+            <div class="form-group">
+              <label for="id">ID</label>
+              <label >{{productFormGroup.controls.id.value}}</label>
+              <input type="hidden" id="id" formControlName="id">
+            </div>
+
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" class="form-control" formControlName="name"
+                     [ngClass]="{'is-invalid' : submitted && productFormGroup.controls.name.errors}">
+              <div *ngIf="submitted && productFormGroup.controls.name.errors" class="invalid-feedback">
+                <div *ngIf="productFormGroup.controls.name.errors.required"> Name is required</div>
+                <div *ngIf="productFormGroup.controls.name.errors.minlength"> Name >= 2</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Price</label>
+              <input type="number" class="form-control" formControlName="price"
+                     [ngClass]="{'is-invalid': submitted && productFormGroup.controls.price.errors}">
+              <div *ngIf="submitted && productFormGroup.controls.price.errors" class="invalid-feedback">
+                <div *ngIf="productFormGroup.controls.price.errors.required"> price is required</div>
+                <div *ngIf="productFormGroup.controls.price.errors.min"> price >= 500</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Quantity</label>
+              <input type="number" class="form-control" formControlName="quantity"
+                     [ngClass]="{'is-invalid': submitted && productFormGroup.controls.quantity.errors}">
+              <div *ngIf="submitted && productFormGroup.controls.quantity.errors" class="invalid-feedback">
+                <div *ngIf="productFormGroup.controls.quantity.errors.required"> price is required</div>
+                <div *ngIf="productFormGroup.controls.quantity.errors.min"> quantity >= 1</div>
+              </div>
+            </div>
+            <div class="row p-3">
+              <div class="col-6">
+                <div class="form-group">
+                  <label>Selected</label>
+                  <input type="checkbox" class="form-check-inline m-1" formControlName="selected">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label>Available</label>
+                  <input type="checkbox" class="form-check-inline m-1" formControlName="available">
+                </div>
+              </div>
+            </div>
+
+
+            <div class="container text-center">
+              <button class="btn btn-outline-success m-1" type="submit"> Save</button>
+              <button class="btn btn-outline-danger m-1" [routerLink]="['/product']">Cancel</button>
+            </div>
+
+          </form>
+
+        </ng-container>
+
+      </ng-container>
+
+    </ng-container>
+
+
+  </ng-container>
+</div>

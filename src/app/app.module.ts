@@ -17,6 +17,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {productsReducer} from './ngrx/products.reducer';
 import {ProductsEffects} from './ngrx/products.effects';
+import { NewProductComponent } from './components/product/new-product/new-product.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {ProductsEffects} from './ngrx/products.effects';
     EditProductComponent,
     ProductListComponent,
     ProductItemComponent,
-    ProductNavBarComponent
+    ProductNavBarComponent,
+    NewProductComponent
   ],
   imports: [
     BrowserModule,
